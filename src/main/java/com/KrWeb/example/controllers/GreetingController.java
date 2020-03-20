@@ -15,6 +15,7 @@ import java.util.Map;
 public class GreetingController {
     @Autowired
     private MessageRepository messageRepository;
+
     @GetMapping
     public String get(Map<String, Object> model) {
         Iterable<Message> messages = messageRepository.findAll();
@@ -28,6 +29,12 @@ public class GreetingController {
         messageRepository.save(message);
         Iterable<Message> messages = messageRepository.findAll();
         model.put("messages", messages);
+        return "MainPage";
+    }
+
+    @GetMapping("deleteAll")
+    public String deleteAll(Map<String, Object> model) {
+        messageRepository.deleteAll();
         return "MainPage";
     }
 

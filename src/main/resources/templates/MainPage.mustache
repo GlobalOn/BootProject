@@ -6,8 +6,8 @@
 </head>
 <body>
 <div>
-    <form method="post">
-        <input type="text" name="text" placeholder="Введите сообщение">
+    <form method="post" action="/">
+                <input type="text" name="text" placeholder="Введите сообщение">
         <input type="text" name="tag" placeholder="Тэг">
         <button type="submit">Добавить</button>
     </form>
@@ -17,6 +17,11 @@
     <input type="text" name="filter">
     <button type="submit">Найти</button>
 </form>
+
+<form method="get" action="deleteAll">
+    <button type="submit">Очистить</button>
+</form>
+
 {{#messages}}
     <div>
         <b>{{id}}</b>
