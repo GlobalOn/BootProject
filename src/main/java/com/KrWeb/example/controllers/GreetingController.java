@@ -16,14 +16,22 @@ public class GreetingController {
     @Autowired
     private MessageRepository messageRepository;
 
-    @GetMapping
+    @GetMapping("/")
+    public String home(@RequestParam(name="name", required = false, defaultValue = "New User") String name,
+                       Map<String, Object> model)
+    {
+        model.put("name", name);
+        return "HomePage";
+    }
+
+    @GetMapping("/Home")
     public String get(Map<String, Object> model) {
         Iterable<Message> messages = messageRepository.findAll();
         model.put("messages", messages);
         return "MainPage";
     }
 
-    @PostMapping
+    @PostMapping("/Home")
     public String add(@RequestParam String text, @RequestParam String tag, Map<String, Object> model) {
         Message message = new Message(text, tag);
         messageRepository.save(message);
@@ -34,8 +42,8 @@ public class GreetingController {
 
     @GetMapping("deleteAll")
     public String deleteAll(Map<String, Object> model) {
-        messageRepository.deleteAll();
-        return "MainPage";
+      messageRepository.deleteAll();
+          return "MainPage";
     }
 
     @PostMapping("filter")
